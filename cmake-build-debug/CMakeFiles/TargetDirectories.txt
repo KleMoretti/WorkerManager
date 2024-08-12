@@ -1,0 +1,3 @@
+D:/@DevCode/WorkerManagerSystem/cmake-build-debug/CMakeFiles/WorkerManagerSystem.dir
+D:/@DevCode/WorkerManagerSystem/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/@DevCode/WorkerManagerSystem/cmake-build-debug/CMakeFiles/rebuild_cache.dir
