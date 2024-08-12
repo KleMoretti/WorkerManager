@@ -2,6 +2,8 @@
 // Created by 贾智超 on 2024/7/22.
 //
 #include "Functions.h"
+
+#include <algorithm>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -42,7 +44,7 @@ void SaveInfo(const std::vector<std::unique_ptr<Person>> &objects) {
         obj->write(ofs);
     }
     ofs.close();
-}3
+}
 
 
 void AddInformation(std::vector<std::unique_ptr<Person>> &WInfo) {
@@ -241,4 +243,80 @@ void ModifyInformation(std::vector<std::unique_ptr<Person>> &Objects) {
     }
 
 }
+
+void FindInformation(std::vector<std::unique_ptr<Person>> &Objects) {
+    try {
+        std::cout << "Find Information"
+                  <<"\n1. Find by Name"
+                  << "\n2. Find by Number"<<std::endl;
+        int choice;
+        std::cout << "Input choice: ";
+        std::cin >> choice;
+        switch (choice) {
+            case 1: {
+                std::cout << "Input the num you want to find: ";
+                int num;
+                bool found=false;
+                std::cin >> num;
+                for  (const auto& obj : Objects) {
+                        if (obj->Number() == num) {
+                            found=true;
+                            obj->ShowNumber();
+                            obj->ShowName();
+                            obj->ShowSpace();
+                            obj->ShowDuty();
+                    }
+                }
+                if (!found) {
+                    std::cout << "No person with that  number found." << std::endl;
+                }
+                break;
+            }
+            case 2: {
+                bool found=false;
+                std::cout << "Input the name you want to find: ";
+                std::string Name;
+                std::cin >> Name;
+                for (const auto& obj : Objects) {
+                    if (obj->Name() == Name) {
+                        found=true;
+                        obj->ShowNumber();
+                        obj->ShowName();
+                        obj->ShowSpace();
+                        obj->ShowDuty();
+                    }
+                }
+                if (!found) {
+                    std::cout << "No person with that name and number found." << std::endl;
+                }
+                break;
+            }
+            default:
+                std::cout << "Invalid choice!" << std::endl;
+                break;
+        }
+
+    }catch (const std::exception&e) {
+        std::cerr << "Error"<<e.what()<<std::endl;
+    }
+}
+
+bool compareByNumber(const std::unique_ptr<Person>& p1, const std::unique_ptr<Person>& p2) {
+    return p1->Number() < p2->Number();
+}
+
+void SortInformation(std::vector<std::unique_ptr<Person>> &Objects) {
+    std::cout << "Sort Information By Number"<<std::endl;
+    std::sort(Objects.begin(), Objects.end(), compareByNumber);
+    ShowInformation(Objects);
+}
+
+void ClearAlltxt(std::vector<std::unique_ptr<Person>> &Objects) {
+    Objects.clear();
+    std::cout << "All information has been cleared." << std::endl;
+}
+
+
+
+
 

@@ -23,14 +23,15 @@ int main() {
                 break;
             case 5:ModifyInformation(WInfo);
                 break;
-            case 6:
+            case 6:FindInformation((WInfo));
                 break;
-            case 7:
+            case 7:SortInformation(WInfo);
                 break;
             case 8:
+                ClearAlltxt(WInfo);
                 break;
             default:std::cout<<"Error,please try again!"<<std::endl;
-            break;
+                break;
         }
     }while(number!=1);
 
