@@ -17,7 +17,7 @@ void Exit() {
 //read用于将文件中的信息重新储存到容器中
 void ReadInfo(std::vector<std::unique_ptr<Person>> &loadedObjects) {
     // 从文件加载对象
-    std::ifstream ifs("WokerManager.txt", std::ios::binary);
+    std::ifstream ifs("WorkerManager.txt", std::ios::binary);
     if (!ifs.is_open()) {
         throw std::runtime_error("Could not open file for reading.");
     }
@@ -26,8 +26,13 @@ void ReadInfo(std::vector<std::unique_ptr<Person>> &loadedObjects) {
         try {
             auto obj = Person::deserialize(ifs);
             loadedObjects.push_back(std::move(obj));
-        } catch (const std::exception&) {
-            break; // 如果文件结束，捕获异常并退出循环
+        } catch (const std::exception& e) {
+            // 捕获异常
+            if (ifs.eof()) { // 检查是否到达文件末尾
+                break;
+            }
+            std::cerr << "Error during deserialization: " << e.what() << std::endl;
+            throw; // 重新抛出异常以通知调用者
         }
     }
     ifs.close();
@@ -35,15 +40,30 @@ void ReadInfo(std::vector<std::unique_ptr<Person>> &loadedObjects) {
 
 void SaveInfo(const std::vector<std::unique_ptr<Person>> &objects) {
     // 保存到文件
-    std::ofstream ofs("WorkerManager.txt", std::ios::binary);
+    std::ofstream ofs("WorkerManager.txt", std::ios::binary | std::ios::out);
     if (!ofs.is_open()) {
         throw std::runtime_error("Could not open file for writing.");
     }
 
-    for (const auto& obj : objects) {
-        obj->write(ofs);
+    try {
+        for (const auto& obj : objects) {
+            if (!obj) {
+                std::cerr << "Encountered null pointer in object list." << std::endl;
+                continue;  // 或者抛出异常，取决于具体需求
+            }
+            obj->write(ofs);
+            // 检查输出是否成功
+            if (!ofs) {
+                std::cerr << "Error writing to file." << std::endl;
+                break;  // 停止写入，避免更多的错误
+            }
+        }
+    } catch (const std::exception&e) {
+        std::cerr << "Error"<<e.what()<<std::endl;
+        // 在捕获所有异常的情况下关闭文件
+        // ofs.close();  // 这里实际上不需要调用 close，因为 ofs 已经在作用域结束时自动关闭
+        throw;  // 重新抛出异常
     }
-    ofs.close();
 }
 
 
@@ -183,7 +203,7 @@ void ModifyInformation(std::vector<std::unique_ptr<Person>> &Objects) {
                 bool found=false;
                 for(const auto& obj : Objects) {
                     if(obj->Number()==num) {
-                        std::cout << "Please input the new name: ";
+                        std::cout << "Please input the new number: ";
                         int newNum;
                         std::cin >> newNum;
                         obj->ChangeNumber(newNum);
@@ -313,6 +333,7 @@ void SortInformation(std::vector<std::unique_ptr<Person>> &Objects) {
 
 void ClearAlltxt(std::vector<std::unique_ptr<Person>> &Objects) {
     Objects.clear();
+    SaveInfo(Objects);
     std::cout << "All information has been cleared." << std::endl;
 }
 

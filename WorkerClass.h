@@ -66,6 +66,10 @@ public:
     void ShowDuty() override ;
     void write(std::ostream& os) const override {
         os << static_cast<int>(Person::Worker) << ' ' << Number() << ' ' << Name() << '\n';
+        // 检查输出是否成功
+        if (!os) {
+            std::cerr << "Error writing to stream." << std::endl;
+        }
     }
 
     void read(std::istream& is) override ;
@@ -103,6 +107,10 @@ public:
 
     void write(std::ostream& os) const override {
         os << static_cast<int>(Person::Manager) << ' ' << Number() << ' ' << Name() << '\n';
+        // 检查输出是否成功
+        if (!os) {
+            std::cerr << "Error writing to stream." << std::endl;
+        }
     }
 
     void read(std::istream& is) override ;
@@ -140,6 +148,10 @@ public:
 
     void write(std::ostream& os) const override {
         os << static_cast<int>(Person::Boss) << ' ' << Number() << ' ' << Name() << '\n';
+        // 检查输出是否成功
+        if (!os) {
+            std::cerr << "Error writing to stream." << std::endl;
+        }
     }
 
     void read(std::istream& is) override ;

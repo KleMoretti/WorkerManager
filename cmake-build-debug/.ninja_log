@@ -71,3 +71,13 @@
 4	396	7450902753258483	CMakeFiles/WorkerManagerSystem.dir/WorkerClass.cpp.obj	80e12e65f852bef9
 16	476	7450902753383197	CMakeFiles/WorkerManagerSystem.dir/Functions.cpp.obj	3d61f7412b6d32b0
 476	606	7450902757973532	WorkerManagerSystem.exe	4ce8cc964464a38d
+21	282	7451681599762598	CMakeFiles/WorkerManagerSystem.dir/context.cpp.obj	ab7e873d7c93df0c
+7	341	7451681599631404	CMakeFiles/WorkerManagerSystem.dir/main.cpp.obj	3ca4f3006d423f01
+33	524	7451681599861479	CMakeFiles/WorkerManagerSystem.dir/Functions.cpp.obj	3d61f7412b6d32b0
+524	657	7451681604763493	WorkerManagerSystem.exe	4ce8cc964464a38d
+6	368	7452217620757089	CMakeFiles/WorkerManagerSystem.dir/main.cpp.obj	3ca4f3006d423f01
+18	394	7452217620880097	CMakeFiles/WorkerManagerSystem.dir/WorkerClass.cpp.obj	80e12e65f852bef9
+30	531	7452217621000298	CMakeFiles/WorkerManagerSystem.dir/Functions.cpp.obj	3d61f7412b6d32b0
+531	668	7452217626011925	WorkerManagerSystem.exe	4ce8cc964464a38d
+3	1590	7452222951452804	CMakeFiles/WorkerManagerSystem.dir/Functions.cpp.obj	3d61f7412b6d32b0
+1590	7183	7452222967315546	WorkerManagerSystem.exe	4ce8cc964464a38d

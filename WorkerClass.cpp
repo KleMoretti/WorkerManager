@@ -8,8 +8,6 @@
 std::unique_ptr<Person> Person::deserialize(std::istream& is) {
         int kind;
         is >> kind;
-
-
         switch (kind) {
                 case Person::Worker:
                         return Worker::fromStream(is);
